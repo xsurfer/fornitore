@@ -16,6 +16,7 @@
  */
 package org.jboss.as.quickstarts.wshelloworld;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jws.WebMethod;
@@ -30,6 +31,10 @@ import javax.jws.WebService;
 @WebService(targetNamespace = "http://fornitore-paasfab.rhcloud.com/jboss-as-helloworld-ws/HelloWorldService")
 public interface HelloWorldService {
 
+	@WebMethod
+    public ArrayList<Event> getEvents();
+	
+	
     /**
      * Say hello as a response
      * 

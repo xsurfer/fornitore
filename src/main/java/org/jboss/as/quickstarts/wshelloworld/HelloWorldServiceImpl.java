@@ -29,6 +29,16 @@ import javax.jws.WebService;
 @WebService(serviceName = "HelloWorldService", portName = "HelloWorld", name = "HelloWorld", endpointInterface = "org.jboss.as.quickstarts.wshelloworld.HelloWorldService", targetNamespace = "http://fornitore-paasfab.rhcloud.com/jboss-as-helloworld-ws/HelloWorldService")
 public class HelloWorldServiceImpl implements HelloWorldService {
 
+	@Override
+	public ArrayList<Event> getEvents(){
+		ArrayList<Event> ret = new ArrayList<Event>();
+		Event a = new Event("Max G in concert", "Max Gazze", "Bella", "Roma");
+		Event b = new Event("Muse in concert", "Muse", "Bella", "Roma");
+		ret.add(a);
+		ret.add(b);
+		return ret;
+	}
+	
     @Override
     public String sayHello() {
         return "Hello World!";
