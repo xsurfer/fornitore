@@ -22,6 +22,9 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import org.jboss.as.quickstarts.wshelloworld.model.Category;
+import org.jboss.as.quickstarts.wshelloworld.model.Event;
+
 /**
  * A simple example of how to setup a JAX-WS Web Service. It can say hello to everyone or to someone in particular.
  * 
@@ -32,10 +35,16 @@ import javax.jws.WebService;
 public interface FornitoreService {
 
 	@WebMethod
+    public ArrayList<Category> getCategories();
+	
+	@WebMethod
     public Event getEvent(Integer idEvent);
 	
 	@WebMethod
     public ArrayList<Event> getEvents();
+	
+	@WebMethod
+    public ArrayList<Event> getEventsByCategory(String name);
 	
 //    /**
 //     * Say hello as a response

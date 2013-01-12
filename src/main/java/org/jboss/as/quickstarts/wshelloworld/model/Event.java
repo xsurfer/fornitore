@@ -1,4 +1,4 @@
-package org.jboss.as.quickstarts.wshelloworld;
+package org.jboss.as.quickstarts.wshelloworld.model;
 
 public class Event {
 	
@@ -7,18 +7,20 @@ public class Event {
 	private String authore;
 	private String description;
 	private String location;
+	private Category category;
 	
 	public Event() {
 	}
 	
 	public Event(Integer id, String title, String authore, String description,
-			String location) {
+			String location, Category category) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.authore = authore;
 		this.description = description;
 		this.location = location;
+		this.category = category;
 	}
 	public String getTitle() {
 		return title;
@@ -51,6 +53,14 @@ public class Event {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
 

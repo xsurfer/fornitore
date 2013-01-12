@@ -17,10 +17,11 @@
 package org.jboss.as.quickstarts.wshelloworld;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+
+import org.jboss.as.quickstarts.wshelloworld.model.*;
 
 /**
  * The implementation of the HelloWorld JAX-WS Web Service.
@@ -31,12 +32,23 @@ import javax.jws.WebService;
 public class FornitoreServiceImpl implements FornitoreService {
 
 	private ArrayList<Event> events = new ArrayList<Event>();
+	private ArrayList<Category> categories = new ArrayList<Category>();
 	
 	{
-		events.add(new Event(events.size(), "Max G in concert", "Max Gazze", "Bella", "Roma"));
-		events.add(new Event(events.size(), "Muse in concert", "Muse", "Bella", "Roma"));
-		events.add(new Event(events.size(), "Gianna Nannona", "Gianna Nannini", "Bella", "Roma"));
-		events.add(new Event(events.size(), "Mimma", "Mina", "Bella", "Roma"));
+		Category music = new Category("music", "Concerti");
+		Category soccer = new Category("soccer", "Calcio");
+		Category museum = new Category("museum", "Musei");
+		
+		categories.add(music);
+		categories.add(soccer);
+		categories.add(museum);
+		
+		events.add(new Event(events.size(), "Max G in concert", "Max Gazze", "Bella", "Roma", music));
+		events.add(new Event(events.size(), "Muse in concert", "Muse", "Bella", "Roma", music));
+		events.add(new Event(events.size(), "Gianna Nannona", "Gianna Nannini", "Bella", "Roma", music));
+		events.add(new Event(events.size(), "Mimma", "Mina", "Bella", "Roma", music));
+		events.add(new Event(events.size(), "Juve-Roma", "Juventus Stadium", "Sfida", "Torino", soccer));
+		events.add(new Event(events.size(), "Milan-Lecce", "San Siro", "Sfida", "Milano", soccer));
 	}
 		
 	@Override
@@ -47,6 +59,24 @@ public class FornitoreServiceImpl implements FornitoreService {
 	@Override
 	public Event getEvent(Integer idEvent) {
 		return events.get(idEvent);
+	}
+
+	@Override
+	@WebMethod
+	public ArrayList<Category> getCategories() {
+		return categories;
+	}
+
+	@Override
+	@WebMethod
+	public ArrayList<Event> getEventsByCategory(String name) {
+		ArrayList<Event> ret = new ArrayList<Event>();
+		for(Event e : events){
+			if(e.getCategory().getName().equals(name)){
+				ret.add(e);
+			}
+		}
+		return ret;
 	}
 	
 //    @Override
