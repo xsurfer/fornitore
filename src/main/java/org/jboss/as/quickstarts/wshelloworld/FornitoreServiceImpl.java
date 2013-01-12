@@ -62,13 +62,11 @@ public class FornitoreServiceImpl implements FornitoreService {
 	}
 
 	@Override
-	@WebMethod
 	public ArrayList<Category> getCategories() {
 		return categories;
 	}
 
 	@Override
-	@WebMethod
 	public ArrayList<Event> getEventsByCategory(String name) {
 		ArrayList<Event> ret = new ArrayList<Event>();
 		for(Event e : events){
