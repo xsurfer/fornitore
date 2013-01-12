@@ -33,6 +33,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 	private ArrayList<Event> events = new ArrayList<Event>();
 	private ArrayList<Category> categories = new ArrayList<Category>();
 	
+	
 	{
 		Category music = new Category("music", "Concerti");
 		Category soccer = new Category("soccer", "Calcio");

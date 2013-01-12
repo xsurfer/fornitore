@@ -36,6 +36,7 @@ public interface FornitoreService {
 	@WebMethod
     public ArrayList<Category> getCategories();
 	
+	
 	@WebMethod
     public Event getEvent(Integer idEvent);
 	
