@@ -12,12 +12,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<servlet>
-		<servlet-name>HelloWorldService</servlet-name>
-		<servlet-class>org.jboss.as.quickstarts.wshelloworld.HelloWorldServiceImpl</servlet-class>
+		<servlet-name>FornitoreService</servlet-name>
+		<servlet-class>org.jboss.as.quickstarts.wshelloworld.FornitoreServiceImpl</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>HelloWorldService</servlet-name>
+		<servlet-name>FornitoreService</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	
