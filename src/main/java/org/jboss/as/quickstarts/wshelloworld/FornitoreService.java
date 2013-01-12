@@ -17,7 +17,6 @@
 package org.jboss.as.quickstarts.wshelloworld;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -46,29 +45,4 @@ public interface FornitoreService {
 	@WebMethod
     public ArrayList<Event> getEventsByCategory(String name);
 	
-//    /**
-//     * Say hello as a response
-//     * 
-//     * @return A simple hello world message
-//     */
-//    @WebMethod
-//    public String sayHello();
-//
-//    /**
-//     * Say hello to someone precisely
-//     * 
-//     * @param name The name of the person to say hello to
-//     * @return the number of current bookings
-//     */
-//    @WebMethod
-//    public String sayHelloToName(String name);
-//
-//    /**
-//     * Say hello to a list of people
-//     * 
-//     * @param names The list of names to say hello to
-//     * @return the number of current bookings
-//     */
-//    @WebMethod
-//    public String sayHelloToNames(List<String> names);
 }
