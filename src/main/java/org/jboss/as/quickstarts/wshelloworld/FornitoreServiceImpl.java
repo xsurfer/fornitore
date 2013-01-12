@@ -33,10 +33,10 @@ public class FornitoreServiceImpl implements FornitoreService {
 	private ArrayList<Event> events = new ArrayList<Event>();
 	
 	{
-		events.add(new Event("Max G in concert", "Max Gazze", "Bella", "Roma"));
-		events.add(new Event("Muse in concert", "Muse", "Bella", "Roma"));
-		events.add(new Event("Gianna Nannona", "Gianna Nannini", "Bella", "Roma"));
-		events.add(new Event("Mimma", "Mina", "Bella", "Roma"));
+		events.add(new Event(events.size(), "Max G in concert", "Max Gazze", "Bella", "Roma"));
+		events.add(new Event(events.size(), "Muse in concert", "Muse", "Bella", "Roma"));
+		events.add(new Event(events.size(), "Gianna Nannona", "Gianna Nannini", "Bella", "Roma"));
+		events.add(new Event(events.size(), "Mimma", "Mina", "Bella", "Roma"));
 	}
 		
 	@Override
