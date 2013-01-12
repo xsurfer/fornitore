@@ -30,7 +30,7 @@ import javax.jws.WebService;
 @WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "org.jboss.as.quickstarts.wshelloworld.FornitoreService", targetNamespace = "http://fornitore-paasfab.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
 public class FornitoreServiceImpl implements FornitoreService {
 
-	private ArrayList<Event> events;
+	private ArrayList<Event> events = new ArrayList<Event>();
 	
 	{
 		events.add(new Event("Max G in concert", "Max Gazze", "Bella", "Roma"));
