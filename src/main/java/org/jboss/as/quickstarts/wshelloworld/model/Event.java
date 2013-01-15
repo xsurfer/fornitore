@@ -8,12 +8,14 @@ public class Event {
 	private String description;
 	private String location;
 	private Category category;
+	private Integer availability;
+	private Double price;
 	
 	public Event() {
 	}
 	
 	public Event(Integer id, String title, String authore, String description,
-			String location, Category category) {
+			String location, Category category, Integer availability, Double price) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -21,7 +23,10 @@ public class Event {
 		this.description = description;
 		this.location = location;
 		this.category = category;
+		this.availability = availability;
+		this.price = price;
 	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -61,6 +66,22 @@ public class Event {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public Integer getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(Integer availability) {
+		this.availability = availability;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 	
 
