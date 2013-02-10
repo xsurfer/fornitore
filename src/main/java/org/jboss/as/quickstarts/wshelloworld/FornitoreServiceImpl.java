@@ -20,6 +20,10 @@ import java.util.ArrayList;
 
 import javax.jws.WebService;
 
+import org.hibernate.*;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 import org.jboss.as.quickstarts.wshelloworld.model.*;
 
 /**
@@ -53,6 +57,27 @@ public class FornitoreServiceImpl implements FornitoreService {
 		
 	@Override
 	public ArrayList<Event> getEvents(){
+		Configuration cfg = new Configuration().configure();
+		
+		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(cfg.getProperties()).buildServiceRegistry();        
+		SessionFactory sessionFactory = cfg.buildSessionFactory(serviceRegistry);
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		
+		session.save( new Event(events.size(), "Max G in concert", "Max Gazze", "Bella", "Roma", 50, 22.0) );
+		session.save( new Event(events.size(), "Max Ga in concert", "Max Gazze", "Bella", "Roma", 50, 22.0) );
+		//session.save( new Event( "A follow up event", new Date() ) );
+		session.getTransaction().commit();
+		
+
+		
+		for(Object e : session.createCriteria(Event.class).list() ){
+			Event ev = (Event) e;
+			System.out.println("Che palle: " + ev.getTitle() );
+		}
+		session.close();
+
 		return events;
 	}
 	
