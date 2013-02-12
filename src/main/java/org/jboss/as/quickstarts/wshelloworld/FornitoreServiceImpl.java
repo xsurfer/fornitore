@@ -46,7 +46,8 @@ public class FornitoreServiceImpl implements FornitoreService {
 		session.beginTransaction();
 		
 		Category music = new Category("music", "Concerti");
-				
+		
+		session.save( music );		
 		session.save( new Event("Max G in concert", "Max Gazze", "Bella", "Roma", music, 50, 22.0) );
 		session.save( new Event("Muse in concert", "Muse", "Bella", "Roma", music, 50, 30.0) );
 	
