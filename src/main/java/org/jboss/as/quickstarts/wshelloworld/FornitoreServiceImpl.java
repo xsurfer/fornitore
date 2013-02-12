@@ -17,6 +17,7 @@
 package org.jboss.as.quickstarts.wshelloworld;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.jws.WebService;
 
@@ -34,16 +35,18 @@ import org.jboss.as.quickstarts.wshelloworld.util.HibernateUtil;
 @WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "org.jboss.as.quickstarts.wshelloworld.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
 public class FornitoreServiceImpl implements FornitoreService {
 
-	private ArrayList<Event> events = new ArrayList<Event>();
-	private ArrayList<Category> categories = new ArrayList<Category>();
-	
-	
+	//private ArrayList<Event> events = new ArrayList<Event>();
+	//private ArrayList<Category> categories = new ArrayList<Category>();
 		
 	@Override
-	public ArrayList<Event> getEvents(){
+	public List<Event> getEvents(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-		session.beginTransaction();
+        @SuppressWarnings("unchecked")
+		List<Event> events =  session.createQuery(
+        	    "from Event as event").list();
+        session.close();
+        return events;
+/*		session.beginTransaction();
 		
 		Category music = new Category("music", "Concerti");
 		
@@ -52,34 +55,48 @@ public class FornitoreServiceImpl implements FornitoreService {
 		session.save( new Event("Muse in concert", "Muse", "Bella", "Roma", music, 50, 30.0) );
 	
 		session.getTransaction().commit();
-		
+
+
 		for(Object e : session.createCriteria(Event.class).list() ){
 			Event ev = (Event) e;
 			System.out.println("Che palle: " + ev.getTitle() );
 		}
 		session.close();
-
-		return events;
+*/
+		
 	}
 	
 	@Override
 	public Event getEvent(Integer idEvent) {
-		return events.get(idEvent);
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Event event = (Event) session.load(Event.class, idEvent);
+		session.close();
+		return event;
 	}
 
 	@Override
-	public ArrayList<Category> getCategories() {
-		return categories;
+	public List<Category> getCategories() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        @SuppressWarnings("unchecked")
+		List<Category> categories =  session.createQuery(
+        	    "from Category as cat").list();
+        session.close();
+        return categories;
 	}
 
 	@Override
-	public ArrayList<Event> getEventsByCategory(String name) {
-		ArrayList<Event> ret = new ArrayList<Event>();
-		for(Event e : events){
-			if(e.getCategory().getName().equals(name)){
-				ret.add(e);
-			}
-		}
-		return ret;
+	public List<Event> getEventsByCategory(Integer idCat) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
+		Category cat = (Category) session.load(Category.class, idCat);
+		
+        @SuppressWarnings("unchecked")
+		List<Event> events =  session.createQuery(
+        	    "from Event as event where event.category = ?")
+        	    .setEntity(0, cat)
+        	    .list();
+        session.close();
+		
+        return events;
 	}
 }

@@ -16,7 +16,7 @@
  */
 package org.jboss.as.quickstarts.wshelloworld;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -34,16 +34,16 @@ import org.jboss.as.quickstarts.wshelloworld.model.Event;
 public interface FornitoreService {
 
 	@WebMethod
-    public ArrayList<Category> getCategories();
+    public List<Category> getCategories();
 	
 	
 	@WebMethod
     public Event getEvent(Integer idEvent);
 	
 	@WebMethod
-    public ArrayList<Event> getEvents();
+    public List<Event> getEvents();
 	
 	@WebMethod
-    public ArrayList<Event> getEventsByCategory(String name);
+    public List<Event> getEventsByCategory(Integer idCat);
 	
 }
