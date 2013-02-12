@@ -14,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "EVENTS")
 public class Event {
 	
-	@Id @GeneratedValue(generator="increment")
+	@Id @GeneratedValue
 	private Long id;
 	public Long getId() { return id; }
 	public void setId(Long id) { this.id = id; }
