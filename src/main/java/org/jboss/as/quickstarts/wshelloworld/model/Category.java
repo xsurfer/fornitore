@@ -6,8 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
+
 @Entity
 @Table(name = "CATEGORY")
+@Proxy(lazy=false)
 public class Category {
 
 	@Id @GeneratedValue
