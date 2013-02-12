@@ -30,7 +30,7 @@ import org.jboss.as.quickstarts.wshelloworld.model.Event;
  * @author lnewson@redhat.com
  */
 
-@WebService(targetNamespace = "http://fornitore-paasfab.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
+@WebService(targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
 public interface FornitoreService {
 
 	@WebMethod

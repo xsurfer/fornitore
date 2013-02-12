@@ -29,7 +29,9 @@ import org.jboss.as.quickstarts.wshelloworld.util.HibernateUtil;
  * 
  * @author lnewson@redhat.com
  */
-@WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "org.jboss.as.quickstarts.wshelloworld.FornitoreService", targetNamespace = "http://fornitore-paasfab.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
+
+//fornitore-fabioperfetti.rhcloud.com
+@WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "org.jboss.as.quickstarts.wshelloworld.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
 public class FornitoreServiceImpl implements FornitoreService {
 
 	private ArrayList<Event> events = new ArrayList<Event>();
