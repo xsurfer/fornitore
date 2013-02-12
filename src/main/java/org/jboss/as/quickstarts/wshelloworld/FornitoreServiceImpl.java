@@ -87,6 +87,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 		Transaction tx = null;
 		Boolean ret = false;
 		try {
+			
 		    tx = session.beginTransaction();
 		    
 		    for(Event e: order.getEvents()){
