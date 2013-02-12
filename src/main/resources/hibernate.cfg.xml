@@ -30,5 +30,6 @@
     <property name="hbm2ddl.auto">update</property>
     
     <mapping class="org.jboss.as.quickstarts.wshelloworld.model.Event"/>
+    <mapping class="org.jboss.as.quickstarts.wshelloworld.model.Category"/>
   </session-factory>
 </hibernate-configuration>
