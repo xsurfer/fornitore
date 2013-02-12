@@ -23,6 +23,7 @@ import javax.jws.WebService;
 
 import org.jboss.as.quickstarts.wshelloworld.model.Category;
 import org.jboss.as.quickstarts.wshelloworld.model.Event;
+import org.jboss.as.quickstarts.wshelloworld.model.Order;
 
 /**
  * A simple example of how to setup a JAX-WS Web Service. It can say hello to everyone or to someone in particular.
@@ -36,7 +37,6 @@ public interface FornitoreService {
 	@WebMethod
     public List<Category> getCategories();
 	
-	
 	@WebMethod
     public Event getEvent(Integer idEvent);
 	
@@ -45,5 +45,8 @@ public interface FornitoreService {
 	
 	@WebMethod
     public List<Event> getEventsByCategory(Integer idCat);
+	
+	@WebMethod
+	public Boolean buy(Order order);
 	
 }

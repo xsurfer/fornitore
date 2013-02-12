@@ -19,6 +19,7 @@ package org.jboss.as.quickstarts.wshelloworld;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.hibernate.*;
@@ -26,18 +27,14 @@ import org.jboss.as.quickstarts.wshelloworld.model.*;
 import org.jboss.as.quickstarts.wshelloworld.util.HibernateUtil;
 
 /**
- * The implementation of the HelloWorld JAX-WS Web Service.
- * 
- * @author lnewson@redhat.com
+ * The implementation of the Fornitore JAX-WS Web Service.
+ *
+ * Root User: adminWDrgCKU
+ * Root Password: PaQp6Auj2kwa
+ * Database Name: fornitore@WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "org.jboss.as.quickstarts.wshelloworld.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
  */
-
-//fornitore-fabioperfetti.rhcloud.com
-@WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "org.jboss.as.quickstarts.wshelloworld.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
 public class FornitoreServiceImpl implements FornitoreService {
-
-	//private ArrayList<Event> events = new ArrayList<Event>();
-	//private ArrayList<Category> categories = new ArrayList<Category>();
-		
+	
 	@Override
 	public List<Event> getEvents(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -45,50 +42,33 @@ public class FornitoreServiceImpl implements FornitoreService {
         @SuppressWarnings("unchecked")
 		List<Event> events =  session.createQuery(
         	    "from Event as event").list();
-        System.out.println("A:");
-        for(Event e : events ){
-			System.out.println("Che palle: " + e.getTitle() );
-		}
-        
-        System.out.println("B:");
         session.getTransaction().commit();
-        for(Event e : events ){
-			System.out.println("Che palle: " + e.getTitle() );
-		}
-        
-        System.out.println("C:");
-        //session.close();
-        for(Event e : events ){
-			System.out.println("Che palle: " + e.getTitle() );
-		}
         return events;
 	}
 	
 	@Override
 	public Event getEvent(Integer idEvent) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		Event event = (Event) session.load(Event.class, idEvent);
 		session.getTransaction().commit();
-		//session.close();
 		return event;
 	}
 
 	@Override
 	public List<Category> getCategories() {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
         @SuppressWarnings("unchecked")
 		List<Category> categories =  session.createQuery(
         	    "from Category as cat").list();
         session.getTransaction().commit();
-        //session.close();
         return categories;
 	}
 
 	@Override
 	public List<Event> getEventsByCategory(Integer idCat) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		Category cat = (Category) session.load(Category.class, idCat);
 		
@@ -97,9 +77,34 @@ public class FornitoreServiceImpl implements FornitoreService {
         	    "from Event as event where event.category = ?")
         	    .setEntity(0, cat)
         	    .list();
-        session.getTransaction().commit();
-        //session.close();
-		
+        session.getTransaction().commit();		
         return events;
 	}
+
+	@Override
+	public Boolean buy(Order order) {		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		Boolean ret = false;
+		try {
+		    tx = session.beginTransaction();
+		    
+		    for(Event e: order.getEvents()){
+		    	e.setAvailability(e.getAvailability()-1);
+		    }
+		    session.save(order);
+			
+			session.getTransaction().commit();
+		    tx.commit();
+		    ret = true;
+		}
+		catch (Exception e) {
+		    if (tx != null) tx.rollback();
+		    e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		return ret;
+	}	
 }
