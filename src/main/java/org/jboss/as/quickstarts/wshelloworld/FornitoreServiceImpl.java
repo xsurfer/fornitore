@@ -16,10 +16,7 @@
  */
 package org.jboss.as.quickstarts.wshelloworld;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.hibernate.*;
@@ -33,6 +30,7 @@ import org.jboss.as.quickstarts.wshelloworld.util.HibernateUtil;
  * Root Password: PaQp6Auj2kwa
  * Database Name: fornitore@WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "org.jboss.as.quickstarts.wshelloworld.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
  */
+@WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "org.jboss.as.quickstarts.wshelloworld.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
 public class FornitoreServiceImpl implements FornitoreService {
 	
 	@Override
