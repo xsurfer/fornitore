@@ -14,9 +14,10 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "EVENTS")
 public class Event {
 	
-	@Id
-    @GeneratedValue
-	private Integer id;
+	@Id @GeneratedValue(generator="increment")
+	private Long id;
+	public Long getId() { return id; }
+	public void setId(Long id) { this.id = id; }
 	
 	@Column(name = "TITLE")
 	private String title;
@@ -42,10 +43,9 @@ public class Event {
 	public Event() {
 	}
 	
-	public Event(Integer id, String title, String authore, String description,
+	public Event(String title, String authore, String description,
 			String location, Category category, Integer availability, Double price) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.authore = authore;
 		this.description = description;
@@ -78,17 +78,6 @@ public class Event {
 	}
 	public void setLocation(String location) {
 		this.location = location;
-	}
-
-	@Id
-	@GeneratedValue(generator="increment")
-	@GenericGenerator(name="increment", strategy = "increment")
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public Category getCategory() {

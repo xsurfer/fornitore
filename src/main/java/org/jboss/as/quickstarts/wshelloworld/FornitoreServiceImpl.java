@@ -38,20 +38,6 @@ public class FornitoreServiceImpl implements FornitoreService {
 	private ArrayList<Category> categories = new ArrayList<Category>();
 	
 	
-	{
-		Category music = new Category("music", "Concerti");
-		Category soccer = new Category("soccer", "Calcio");
-		Category museum = new Category("museum", "Musei");
-		
-		categories.add(music);
-		categories.add(soccer);
-		categories.add(museum);
-		
-		//events.add(new Event(events.size(), "Gianna Nannona", "Gianna Nannini", "Bella", "Roma", music, 50, 15.0));
-		events.add(new Event(events.size(), "Mimma", "Mina", "Bella", "Roma", music, 50, 20.0));
-		events.add(new Event(events.size(), "Juve-Roma", "Juventus Stadium", "Sfida", "Torino", soccer, 50, 33.0));
-		events.add(new Event(events.size(), "Milan-Lecce", "San Siro", "Sfida", "Milano", soccer, 50, 20.0));
-	}
 		
 	@Override
 	public ArrayList<Event> getEvents(){
@@ -61,8 +47,8 @@ public class FornitoreServiceImpl implements FornitoreService {
 		
 		Category music = new Category("music", "Concerti");
 				
-		session.save( new Event(events.size(), "Max G in concert", "Max Gazze", "Bella", "Roma", music, 50, 22.0) );
-		session.save( new Event(events.size(), "Muse in concert", "Muse", "Bella", "Roma", music, 50, 30.0) );
+		session.save( new Event("Max G in concert", "Max Gazze", "Bella", "Roma", music, 50, 22.0) );
+		session.save( new Event("Muse in concert", "Muse", "Bella", "Roma", music, 50, 30.0) );
 	
 		session.getTransaction().commit();
 		
