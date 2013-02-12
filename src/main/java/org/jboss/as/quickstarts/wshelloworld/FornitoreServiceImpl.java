@@ -57,7 +57,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 		}
         
         System.out.println("C:");
-        session.close();
+        //session.close();
         for(Event e : events ){
 			System.out.println("Che palle: " + e.getTitle() );
 		}
@@ -70,7 +70,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 		session.beginTransaction();
 		Event event = (Event) session.load(Event.class, idEvent);
 		session.getTransaction().commit();
-		session.close();
+		//session.close();
 		return event;
 	}
 
@@ -82,7 +82,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 		List<Category> categories =  session.createQuery(
         	    "from Category as cat").list();
         session.getTransaction().commit();
-        session.close();
+        //session.close();
         return categories;
 	}
 
@@ -98,7 +98,7 @@ public class FornitoreServiceImpl implements FornitoreService {
         	    .setEntity(0, cat)
         	    .list();
         session.getTransaction().commit();
-        session.close();
+        //session.close();
 		
         return events;
 	}
