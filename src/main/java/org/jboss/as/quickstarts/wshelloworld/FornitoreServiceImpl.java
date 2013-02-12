@@ -45,8 +45,22 @@ public class FornitoreServiceImpl implements FornitoreService {
         @SuppressWarnings("unchecked")
 		List<Event> events =  session.createQuery(
         	    "from Event as event").list();
+        System.out.println("A:");
+        for(Event e : events ){
+			System.out.println("Che palle: " + e.getTitle() );
+		}
+        
+        System.out.println("B:");
         session.getTransaction().commit();
+        for(Event e : events ){
+			System.out.println("Che palle: " + e.getTitle() );
+		}
+        
+        System.out.println("C:");
         session.close();
+        for(Event e : events ){
+			System.out.println("Che palle: " + e.getTitle() );
+		}
         return events;
 /*		session.beginTransaction();
 		
