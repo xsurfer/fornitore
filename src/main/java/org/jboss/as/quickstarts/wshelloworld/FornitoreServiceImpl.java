@@ -65,7 +65,7 @@ public class FornitoreServiceImpl implements FornitoreService {
         session.getTransaction().commit();
         return categories;
 	}
-
+	
 	@Override
 	public List<Event> getEventsByCategory(Integer idCat) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -87,14 +87,12 @@ public class FornitoreServiceImpl implements FornitoreService {
 		Transaction tx = null;
 		Boolean ret = false;
 		try {
-			
 		    tx = session.beginTransaction();
 		    
 		    for(Event e: order.getEvents()){
 		    	e.setAvailability(e.getAvailability()-1);
 		    }
 		    session.save(order);
-			
 			session.getTransaction().commit();
 		    tx.commit();
 		    ret = true;

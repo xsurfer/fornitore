@@ -47,6 +47,5 @@ public interface FornitoreService {
     public List<Event> getEventsByCategory(Integer idCat);
 	
 	@WebMethod
-	public Boolean buy(Order order);
-	
+	public Boolean buy(Order order);	
 }
