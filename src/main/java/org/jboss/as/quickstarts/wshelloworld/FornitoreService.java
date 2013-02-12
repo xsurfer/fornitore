@@ -38,13 +38,13 @@ public interface FornitoreService {
     public List<Category> getCategories();
 	
 	@WebMethod
-    public Event getEvent(Integer idEvent);
+    public Event getEvent(Long idEvent);
 	
 	@WebMethod
     public List<Event> getEvents();
 	
 	@WebMethod
-    public List<Event> getEventsByCategory(Integer idCat);
+    public List<Event> getEventsByCategory(Long idCat);
 	
 	@WebMethod
 	public Boolean buy(Order order);	

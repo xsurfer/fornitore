@@ -45,7 +45,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 	}
 	
 	@Override
-	public Event getEvent(Integer idEvent) {
+	public Event getEvent(Long idEvent) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		Event event = (Event) session.load(Event.class, idEvent);
@@ -65,7 +65,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 	}
 	
 	@Override
-	public List<Event> getEventsByCategory(Integer idCat) {
+	public List<Event> getEventsByCategory(Long idCat) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		Category cat = (Category) session.load(Category.class, idCat);
