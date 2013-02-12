@@ -41,9 +41,11 @@ public class FornitoreServiceImpl implements FornitoreService {
 	@Override
 	public List<Event> getEvents(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
         @SuppressWarnings("unchecked")
 		List<Event> events =  session.createQuery(
         	    "from Event as event").list();
+        session.getTransaction().commit();
         session.close();
         return events;
 /*		session.beginTransaction();
@@ -69,7 +71,9 @@ public class FornitoreServiceImpl implements FornitoreService {
 	@Override
 	public Event getEvent(Integer idEvent) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		Event event = (Event) session.load(Event.class, idEvent);
+		session.getTransaction().commit();
 		session.close();
 		return event;
 	}
@@ -77,9 +81,11 @@ public class FornitoreServiceImpl implements FornitoreService {
 	@Override
 	public List<Category> getCategories() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
         @SuppressWarnings("unchecked")
 		List<Category> categories =  session.createQuery(
         	    "from Category as cat").list();
+        session.getTransaction().commit();
         session.close();
         return categories;
 	}
@@ -87,7 +93,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 	@Override
 	public List<Event> getEventsByCategory(Integer idCat) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		
+		session.beginTransaction();
 		Category cat = (Category) session.load(Category.class, idCat);
 		
         @SuppressWarnings("unchecked")
@@ -95,6 +101,7 @@ public class FornitoreServiceImpl implements FornitoreService {
         	    "from Event as event where event.category = ?")
         	    .setEntity(0, cat)
         	    .list();
+        session.getTransaction().commit();
         session.close();
 		
         return events;
