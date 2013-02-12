@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -13,6 +14,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "EVENTS")
 public class Event {
 	
+	@Id
+    @GeneratedValue
 	private Integer id;
 	
 	@Column(name = "TITLE")
@@ -27,7 +30,7 @@ public class Event {
 	@Column(name = "LOCATION")
 	private String location;
 	
-	//@Column(name = "CATEGORY")
+	@ManyToOne
 	private Category category;
 	
 	@Column(name = "AVAILABILITY")
@@ -51,19 +54,7 @@ public class Event {
 		this.availability = availability;
 		this.price = price;
 	}
-	
-	public Event(Integer id, String title, String authore, String description,
-			String location, Integer availability, Double price) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.authore = authore;
-		this.description = description;
-		this.location = location;
-		this.availability = availability;
-		this.price = price;
-	}
-	
+		
 	public String getTitle() {
 		return title;
 	}
