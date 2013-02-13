@@ -35,7 +35,7 @@ import org.jboss.as.quickstarts.wshelloworld.util.HibernateUtil;
 public class FornitoreServiceImpl implements FornitoreService {
 	
 	@Override
-	public Event[] getEvents(){
+	public List<Event> getEvents(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         @SuppressWarnings("unchecked")
@@ -55,18 +55,18 @@ public class FornitoreServiceImpl implements FornitoreService {
 	}
 
 	@Override
-	public Category[] getCategories() {
+	public List<Category> getCategories() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
         @SuppressWarnings("unchecked")
 		List<Category> categories =  session.createQuery(
         	    "from Category as cat").list();
         session.getTransaction().commit();
-        return (Category[]) categories.toArray();
+        return categories;
 	}
 	
 	@Override
-	public Event[] getEventsByCategory(Long idCat) {
+	public List<Event> getEventsByCategory(Long idCat) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		Category cat = (Category) session.load(Category.class, idCat);
@@ -77,7 +77,7 @@ public class FornitoreServiceImpl implements FornitoreService {
         	    .setEntity(0, cat)
         	    .list();
         session.getTransaction().commit();		
-        return (Event[]) events.toArray();
+        return events;
 	}
 
 	@Override
