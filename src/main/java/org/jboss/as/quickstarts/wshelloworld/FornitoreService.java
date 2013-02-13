@@ -16,8 +16,6 @@
  */
 package org.jboss.as.quickstarts.wshelloworld;
 
-import java.util.List;
-
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
@@ -35,17 +33,17 @@ import org.jboss.as.quickstarts.wshelloworld.model.Order;
 public interface FornitoreService {
 
 	@WebMethod
-    public List<Category> getCategories();
+    public Category[] getCategories();
 	
 	@WebMethod
     public Event getEvent(Long idEvent);
 	
 	@WebMethod
-    public List<Event> getEvents();
+    public Event[] getEvents();
 	
 	@WebMethod
-    public List<Event> getEventsByCategory(Long idCat);
+    public Event[] getEventsByCategory(Long idCat);
 	
 	@WebMethod
-	public Boolean buy(Order order);	
+	public Boolean buy(Event[] events, int[] quantities, String vendor);	
 }

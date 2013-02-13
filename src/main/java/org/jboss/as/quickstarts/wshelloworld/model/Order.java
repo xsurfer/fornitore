@@ -1,6 +1,5 @@
 package org.jboss.as.quickstarts.wshelloworld.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class Order {
 	@OneToMany
 	public List<Detail> getDetails() { return details; }
 	public void addDetail(Detail detail) { details.add(detail); }
-	private List<Detail> details = new ArrayList<Detail>();
+	private List<Detail> details;
 
 	@Temporal(TemporalType.DATE) @NotNull @Column(updatable=false)
 	public Date getDate() { return date; }

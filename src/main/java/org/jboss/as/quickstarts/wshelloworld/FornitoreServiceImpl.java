@@ -16,6 +16,7 @@
  */
 package org.jboss.as.quickstarts.wshelloworld;
 
+import java.util.Date;
 import java.util.List;
 import javax.jws.WebService;
 
@@ -34,14 +35,14 @@ import org.jboss.as.quickstarts.wshelloworld.util.HibernateUtil;
 public class FornitoreServiceImpl implements FornitoreService {
 	
 	@Override
-	public List<Event> getEvents(){
+	public Event[] getEvents(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         @SuppressWarnings("unchecked")
 		List<Event> events =  session.createQuery(
         	    "from Event as event").list();
         session.getTransaction().commit();
-        return events;
+        return (Event[]) events.toArray();
 	}
 	
 	@Override
@@ -54,18 +55,18 @@ public class FornitoreServiceImpl implements FornitoreService {
 	}
 
 	@Override
-	public List<Category> getCategories() {
+	public Category[] getCategories() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
         @SuppressWarnings("unchecked")
 		List<Category> categories =  session.createQuery(
         	    "from Category as cat").list();
         session.getTransaction().commit();
-        return categories;
+        return (Category[]) categories.toArray();
 	}
 	
 	@Override
-	public List<Event> getEventsByCategory(Long idCat) {
+	public Event[] getEventsByCategory(Long idCat) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		Category cat = (Category) session.load(Category.class, idCat);
@@ -76,21 +77,32 @@ public class FornitoreServiceImpl implements FornitoreService {
         	    .setEntity(0, cat)
         	    .list();
         session.getTransaction().commit();		
-        return events;
+        return (Event[]) events.toArray();
 	}
 
 	@Override
-	public Boolean buy(Order order) {		
+	public Boolean buy(Event[] events, int[] quantities, String vendor) {		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
 		Boolean ret = false;
 		try {
 		    tx = session.beginTransaction();
-		    
-		    for(Detail detail: order.getDetails()){
-		    	Event e = detail.getEvent();
-		    	e.setAvailability(e.getAvailability()-detail.getQuantity());
+		    Order order = new Order();
+		    order.setDate(new Date());
+		    order.setTotal(calculateAmount(events, quantities));
+		    order.setVendor(vendor);
+
+		    int i = 0;
+		    for(Event e: events){	
+		    	session.update(e);
+		    	e.setAvailability(e.getAvailability()-quantities[i]);
+		    	Detail det = new Detail();
+		    	det.setEvent(e);
+		    	det.setQuantity(quantities[i]);
+		    	det.setOrder(order);
+		    	i++;
 		    }
+		    		    
 		    session.save(order);
 			session.getTransaction().commit();
 		    tx.commit();
@@ -105,4 +117,13 @@ public class FornitoreServiceImpl implements FornitoreService {
 		}
 		return ret;
 	}	
+	
+	private Double calculateAmount(Event[] events, int[] quantities){
+		Double tot = 0.0;
+		int i = 0;
+		for(Event e : events){
+			tot += e.getPrice()*2; 
+		}
+		return tot;
+	}
 }
