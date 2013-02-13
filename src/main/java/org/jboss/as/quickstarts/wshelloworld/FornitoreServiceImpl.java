@@ -42,7 +42,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 		List<Event> events =  session.createQuery(
         	    "from Event as event").list();
         session.getTransaction().commit();
-        return (Event[]) events.toArray();
+        return events;
 	}
 	
 	@Override
