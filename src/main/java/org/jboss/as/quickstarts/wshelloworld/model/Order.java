@@ -24,12 +24,23 @@ public class Order {
 	public void setId(Long id) { this.id = id; }
 
 	@OneToMany
-	public List<Event> getEvents() { return events; }
-	public void addEvent(Event event) { events.add(event); }
-	private List<Event> events = new ArrayList<Event>();
+	public List<Detail> getDetails() { return details; }
+	public void addDetail(Detail detail) { details.add(detail); }
+	private List<Detail> details = new ArrayList<Detail>();
 
 	@Temporal(TemporalType.DATE) @NotNull @Column(updatable=false)
 	public Date getDate() { return date; }
 	public void setDate(Date date) { this.date = date; }
 	private Date date;
+	
+	@Column(name = "TOTAL")
+	private Double total;
+	public Double getTotal() { return total; }
+	public void setTotal(Double total) { this.total = total; }	
+	
+	@Column(name = "VENDOR")
+	private String vendor;
+	public String getVendor() { return vendor; }
+	public void setVendor(String vendor) { this.vendor = vendor; }
+	
 }

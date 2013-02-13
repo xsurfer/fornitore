@@ -87,8 +87,9 @@ public class FornitoreServiceImpl implements FornitoreService {
 		try {
 		    tx = session.beginTransaction();
 		    
-		    for(Event e: order.getEvents()){
-		    	e.setAvailability(e.getAvailability()-1);
+		    for(Detail detail: order.getDetails()){
+		    	Event e = detail.getEvent();
+		    	e.setAvailability(e.getAvailability()-detail.getQuantity());
 		    }
 		    session.save(order);
 			session.getTransaction().commit();
