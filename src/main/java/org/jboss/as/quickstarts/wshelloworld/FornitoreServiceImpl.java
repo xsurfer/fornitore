@@ -122,7 +122,8 @@ public class FornitoreServiceImpl implements FornitoreService {
 		Double tot = 0.0;
 		int i = 0;
 		for(Event e : events){
-			tot += e.getPrice()*2; 
+			tot += e.getPrice()*quantities[i]; 
+			i++;
 		}
 		return tot;
 	}
