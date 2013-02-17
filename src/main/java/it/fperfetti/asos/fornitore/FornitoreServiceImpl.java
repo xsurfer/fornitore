@@ -163,6 +163,8 @@ public class FornitoreServiceImpl implements FornitoreService {
 				det.setEvent(e);
 				det.setQuantity(quantities[i]);
 				det.setOrder(order);
+				session.persist(det);
+				order.addDetail(det);
 				i++;
 			}
 			session.persist(order);

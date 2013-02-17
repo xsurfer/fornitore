@@ -30,8 +30,8 @@ public class ReservationCleaner implements Runnable {
 			tx = session.beginTransaction();
 			@SuppressWarnings("unchecked")
 			List<Order> orders = session.createQuery(
-					"from Order as order where order.confimated = ?")
-					.setEntity(0, false)
+					"from Order as order where order.confimated = :isConfirmated")
+					.setBoolean("isConfirmated", false)
 					.list();
 			
 			for(Order o: orders){
