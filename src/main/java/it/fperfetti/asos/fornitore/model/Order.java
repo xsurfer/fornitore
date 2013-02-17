@@ -30,7 +30,7 @@ public class Order {
 	public void addDetail(Detail detail) { details.add(detail); }
 	
 	@Column(name = "TOTAL")
-	private Double total;
+	private Double total = new Double(0.0);
 	public Double getTotal() { return total; }
 	public void setTotal(Double total) { this.total = total; }	
 

@@ -30,19 +30,25 @@ public class ReservationCleaner implements Runnable {
 			tx = session.beginTransaction();
 			@SuppressWarnings("unchecked")
 			List<Order> orders = session.createQuery(
-					"from Order as order where order.confimated = :isConfirmated")
-					.setBoolean("isConfirmated", false)
+					"from Order as order where order.confimated = :confirmated")
+					.setBoolean("confirmated", false)
 					.list();
-			
+			System.out.println("checking");
 			for(Order o: orders){
+				System.out.println("validando oggetto " + o.getId());
 				if(!o.isValidOrder()){
+					System.out.println("oggetto non più valido");
 					/* Ripristino i biglietti*/
-					for(Detail d: o.getDetails()){	
+					for(Detail d: o.getDetails()){							
 						Event e = d.getEvent();
+						System.out.println("aggiorno evento " + e.getTitle());
 						int quantity = d.getQuantity();
 						e.setAvailability(e.getAvailability()+quantity);
+						session.update(e);
+						System.out.println("elimino dettaglio " + d.getId());
 						session.delete(d);
 					}
+					System.out.println("elimino ordine " + o.getId());
 					session.delete(o);
 				}
 			}
