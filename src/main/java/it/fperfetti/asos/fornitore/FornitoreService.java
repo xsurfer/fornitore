@@ -32,7 +32,7 @@ import javax.jws.WebService;
  * @author lnewson@redhat.com
  */
 
-@WebService(targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/FornitoreService")
+@WebService(targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
 public interface FornitoreService {
 
 	@WebMethod

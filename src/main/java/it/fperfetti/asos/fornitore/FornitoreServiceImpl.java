@@ -42,7 +42,7 @@ import org.hibernate.*;
  * 
  */
 
-@WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "it.fperfetti.asos.fornitore.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/FornitoreService")
+@WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "it.fperfetti.asos.fornitore.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
 public class FornitoreServiceImpl implements FornitoreService {
 
 	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
