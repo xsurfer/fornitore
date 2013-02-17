@@ -44,7 +44,6 @@ public class FornitoreServiceImpl implements FornitoreService {
 		try {
 			tx = session.beginTransaction();		
 			events =  session.createQuery("from Event as event").list();
-			session.getTransaction().commit();
 			tx.commit();
 		}
 		catch (Exception e) {
@@ -65,7 +64,6 @@ public class FornitoreServiceImpl implements FornitoreService {
 		try {
 			tx = session.beginTransaction();		
 			event = (Event) session.load(Event.class, idEvent);
-			session.getTransaction().commit();
 			tx.commit();
 		}
 		catch (Exception e) {
@@ -88,7 +86,6 @@ public class FornitoreServiceImpl implements FornitoreService {
 			tx = session.beginTransaction();		
 			categories =  session.createQuery(
 					"from Category as cat").list();
-			session.getTransaction().commit();
 			tx.commit();
 		}
 		catch (Exception e) {
@@ -114,7 +111,6 @@ public class FornitoreServiceImpl implements FornitoreService {
 					"from Event as event where event.category = ?")
 					.setEntity(0, cat)
 					.list();
-			session.getTransaction().commit();
 			tx.commit();
 		}
 		catch (Exception e) {
