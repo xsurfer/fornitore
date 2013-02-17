@@ -1,4 +1,4 @@
-package org.jboss.as.quickstarts.wshelloworld.util;
+package it.fperfetti.asos.fornitore.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

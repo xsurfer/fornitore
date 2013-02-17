@@ -13,7 +13,7 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<servlet>
 		<servlet-name>FornitoreService</servlet-name>
-		<servlet-class>org.jboss.as.quickstarts.wshelloworld.FornitoreServiceImpl</servlet-class>
+		<servlet-class>it.fperfetti.asos.fornitore.FornitoreServiceImpl</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>

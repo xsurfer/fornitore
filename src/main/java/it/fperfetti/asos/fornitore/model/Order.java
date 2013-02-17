@@ -1,4 +1,4 @@
-package org.jboss.as.quickstarts.wshelloworld.model;
+package it.fperfetti.asos.fornitore.model;
 
 import java.util.Date;
 import java.util.List;

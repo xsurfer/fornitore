@@ -14,16 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.wshelloworld;
+package it.fperfetti.asos.fornitore;
+
+import it.fperfetti.asos.fornitore.model.Category;
+import it.fperfetti.asos.fornitore.model.Event;
+import it.fperfetti.asos.fornitore.model.Order;
 
 import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import org.jboss.as.quickstarts.wshelloworld.model.Category;
-import org.jboss.as.quickstarts.wshelloworld.model.Event;
-import org.jboss.as.quickstarts.wshelloworld.model.Order;
 
 /**
  * A simple example of how to setup a JAX-WS Web Service. It can say hello to everyone or to someone in particular.
@@ -31,7 +32,7 @@ import org.jboss.as.quickstarts.wshelloworld.model.Order;
  * @author lnewson@redhat.com
  */
 
-@WebService(targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
+@WebService(targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/FornitoreService")
 public interface FornitoreService {
 
 	@WebMethod

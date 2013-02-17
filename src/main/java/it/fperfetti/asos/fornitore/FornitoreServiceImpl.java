@@ -14,7 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.wshelloworld;
+package it.fperfetti.asos.fornitore;
+
+import it.fperfetti.asos.fornitore.model.*;
+import it.fperfetti.asos.fornitore.util.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,17 +25,17 @@ import java.util.List;
 import javax.jws.WebService;
 
 import org.hibernate.*;
-import org.jboss.as.quickstarts.wshelloworld.model.*;
-import org.jboss.as.quickstarts.wshelloworld.util.HibernateUtil;
 
 /**
  * The implementation of the Fornitore JAX-WS Web Service.
  *
  * Root User: adminWDrgCKU
  * Root Password: PaQp6Auj2kwa
- * Database Name: fornitore@WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "org.jboss.as.quickstarts.wshelloworld.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
+ * Database Name: fornitore
+ * 
  */
-@WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "org.jboss.as.quickstarts.wshelloworld.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/jboss-as-helloworld-ws/FornitoreService")
+
+@WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "it.fperfetti.asos.fornitore.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/FornitoreService")
 public class FornitoreServiceImpl implements FornitoreService {
 
 	@SuppressWarnings("unchecked")
