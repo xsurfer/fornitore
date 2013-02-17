@@ -53,9 +53,14 @@ public class Order {
 
 	public Boolean isValidOrder(){
 		Timestamp ts = new Timestamp(getDate().getTime());
+		System.out.println("ts memorizzato: " + ts);
+		
 		long m = 8*60*1000;
 		Timestamp thresholdTs = new Timestamp(ts.getTime()+m);
-		if(ts.compareTo(thresholdTs)<=0){ return true; }
+		System.out.println("ts soglia: " + thresholdTs);
+		
+		Timestamp curr = new Timestamp(new Date().getTime()); 
+		if(curr.compareTo(ts)>=0 && curr.compareTo(thresholdTs)<=0){ return true; }
 		return false;
 	}
 }
