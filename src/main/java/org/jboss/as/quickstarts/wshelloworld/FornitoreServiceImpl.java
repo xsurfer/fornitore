@@ -63,7 +63,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 		Event event = new Event();
 		try {
 			tx = session.beginTransaction();		
-			event = (Event) session.load(Event.class, idEvent);
+			event = (Event) session.get(Event.class, idEvent);
 			tx.commit();
 		}
 		catch (Exception e) {
@@ -103,7 +103,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 	public List<Event> getEventsByCategory(Long idCat) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
-		Category cat = (Category) session.load(Category.class, idCat);
+		Category cat = (Category) session.get(Category.class, idCat);
 		List<Event> events = new ArrayList<Event>();
 		try {
 			tx = session.beginTransaction();		
