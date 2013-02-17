@@ -1,6 +1,7 @@
 package it.fperfetti.asos.fornitore.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,11 +25,10 @@ public class Order {
 	public void setId(Long id) { this.id = id; }
 
 	@OneToMany
-	private List<Detail> details;
+	private List<Detail> details = new ArrayList<Detail>();
 	public List<Detail> getDetails() { return details; }
 	public void addDetail(Detail detail) { details.add(detail); }
 	
-
 	@Column(name = "TOTAL")
 	private Double total;
 	public Double getTotal() { return total; }
