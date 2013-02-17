@@ -216,6 +216,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 		return ret;
 	}	
 	
+	
 	private Double calculateAmount(Event[] events, int[] quantities){
 		Double tot = 0.0;
 		int i = 0;
