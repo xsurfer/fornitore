@@ -44,13 +44,13 @@ public class Order {
 	public Boolean getConfimated() { return confimated; }
 	public void setConfirmated(Boolean confimated) { this.confimated = confimated; }
 
-	@Temporal(TemporalType.TIMESTAMP) @NotNull @Column(updatable=false)
-	private Timestamp timestamp;
-	public Date getTimestamp() { return timestamp; }
-	public void setTimestamp(Timestamp timestamp) { this.timestamp = timestamp; }
+	@Temporal(TemporalType.DATE) @NotNull @Column(updatable=false)
+	private Date timestamp;
+	public Date getDate() { return timestamp; }
+	public void setDate(Date timestamp) { this.timestamp = timestamp; }
 
 	public Boolean isValidOrder(){
-		Timestamp ts = (Timestamp) getTimestamp();
+		Timestamp ts = new Timestamp(getDate().getTime());
 		long m = 8*60*1000;
 		Timestamp thresholdTs = new Timestamp(ts.getTime()+m);
 		if(ts.compareTo(thresholdTs)<=0){ return true; }

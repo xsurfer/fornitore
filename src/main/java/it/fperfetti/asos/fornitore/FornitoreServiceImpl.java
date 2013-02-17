@@ -153,7 +153,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 			order.setTotal(calculateAmount(events, quantities));
 			order.setVendor(vendor);
 			order.setConfirmated(false);
-			order.setTimestamp(new Timestamp(new Date().getTime()));
+			order.setDate(new Date());
 
 			int i = 0;
 			for(Event e: events){	
