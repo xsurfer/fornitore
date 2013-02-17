@@ -44,7 +44,7 @@ public class Order {
 	public Boolean getConfimated() { return confimated; }
 	public void setConfirmated(Boolean confimated) { this.confimated = confimated; }
 
-	@Temporal(TemporalType.DATE) @NotNull @Column(updatable=false)
+	@Temporal(TemporalType.TIMESTAMP) @NotNull @Column(updatable=false)
 	private Date timestamp;
 	public Date getDate() { return timestamp; }
 	public void setDate(Date timestamp) { this.timestamp = timestamp; }
