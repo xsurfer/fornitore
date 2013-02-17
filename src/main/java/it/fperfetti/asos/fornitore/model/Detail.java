@@ -23,8 +23,7 @@ public class Detail {
 	public Order getOrder() { return order; }
 	public void setOrder(Order order) { this.order = order; }
 	
-	@Column(name = "QUANTITY")
-	private Integer quantity;
+	@Column(name = "QUANTITY") private Integer quantity;
 	public Integer getQuantity() { return quantity; }
 	public void setQuantity(Integer quantity) { this.quantity = quantity; }
 }

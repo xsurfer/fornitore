@@ -24,9 +24,10 @@ public class Order {
 	public void setId(Long id) { this.id = id; }
 
 	@OneToMany
+	private List<Detail> details;
 	public List<Detail> getDetails() { return details; }
 	public void addDetail(Detail detail) { details.add(detail); }
-	private List<Detail> details;
+	
 
 	@Column(name = "TOTAL")
 	private Double total;
@@ -44,9 +45,9 @@ public class Order {
 	public void setConfirmated(Boolean confimated) { this.confimated = confimated; }
 
 	@Temporal(TemporalType.TIMESTAMP) @NotNull @Column(updatable=false)
+	private Timestamp timestamp;
 	public Date getTimestamp() { return timestamp; }
 	public void setTimestamp(Timestamp timestamp) { this.timestamp = timestamp; }
-	private Timestamp timestamp;
 
 	public Boolean isValidOrder(){
 		Timestamp ts = (Timestamp) getTimestamp();
