@@ -48,5 +48,8 @@ public interface FornitoreService {
     public List<Event> getEventsByCategory(Long idCat);
 	
 	@WebMethod
-	public Boolean buy(Event[] events, int[] quantities, String vendor);	
+	public Long prebook(Event[] events, int[] quantities, String vendor);	
+	
+	@WebMethod
+	public Boolean book(Long idOrder);	
 }

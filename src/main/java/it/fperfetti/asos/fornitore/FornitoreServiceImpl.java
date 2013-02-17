@@ -18,10 +18,17 @@ package it.fperfetti.asos.fornitore;
 
 import it.fperfetti.asos.fornitore.model.*;
 import it.fperfetti.asos.fornitore.util.HibernateUtil;
+import it.fperfetti.asos.fornitore.util.ReservationCleaner;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
 import javax.jws.WebService;
 
 import org.hibernate.*;
@@ -38,6 +45,14 @@ import org.hibernate.*;
 @WebService(serviceName = "FornitoreService", portName = "Fornitore", name = "Fornitore", endpointInterface = "it.fperfetti.asos.fornitore.FornitoreService", targetNamespace = "http://fornitore-fabioperfetti.rhcloud.com/FornitoreService")
 public class FornitoreServiceImpl implements FornitoreService {
 
+	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+	final ScheduledFuture<?> cleanerHandle;
+	
+	public FornitoreServiceImpl(){
+		ReservationCleaner cleaner = ReservationCleaner.getInstance();
+		cleanerHandle = scheduler.scheduleAtFixedRate(cleaner, 10, 5*60, TimeUnit.SECONDS);		
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Event> getEvents(){
@@ -125,18 +140,20 @@ public class FornitoreServiceImpl implements FornitoreService {
 		}
 		return events;
 	}
-
+	
 	@Override
-	public Boolean buy(Event[] events, int[] quantities, String vendor) {		
+	public Long prebook(Event[] events, int[] quantities, String vendor){
+		Long preOrderId = new Long(-1);
+		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
-		Boolean ret = false;
 		try {
 			tx = session.beginTransaction();
 			Order order = new Order();
-			order.setDate(new Date());
 			order.setTotal(calculateAmount(events, quantities));
 			order.setVendor(vendor);
+			order.setConfirmated(false);
+			order.setTimestamp(new Timestamp(new Date().getTime()));
 
 			int i = 0;
 			for(Event e: events){	
@@ -148,11 +165,44 @@ public class FornitoreServiceImpl implements FornitoreService {
 				det.setOrder(order);
 				i++;
 			}
-
-			session.save(order);
-			session.getTransaction().commit();
+			session.persist(order);
 			tx.commit();
-			ret = true;
+			preOrderId = order.getId();
+		}
+		catch (Exception e) {
+			if (tx != null) tx.rollback();
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		return preOrderId;
+	}
+
+	@Override
+	public Boolean book(Long idOrder) {		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null;
+		Boolean ret = false;
+		try {
+			tx = session.beginTransaction();
+			Order order = (Order) session.get(Order.class, idOrder);
+			if(order==null){
+				new Exception("Order not valid");
+			} 
+			else if(order.getConfimated()){
+				new Exception("Order already confirmated");
+			}
+			else if (!order.isValidOrder()){
+				/* Sessione scaduta, le quantità verranno ripristinate dal processo batch al più breve */
+				new Exception("Session Expired");
+			}
+			else {
+				order.setConfirmated(true);
+				session.save(order);
+				tx.commit();
+				ret = true;
+			}
 		}
 		catch (Exception e) {
 			if (tx != null) tx.rollback();
@@ -163,7 +213,7 @@ public class FornitoreServiceImpl implements FornitoreService {
 		}
 		return ret;
 	}	
-
+	
 	private Double calculateAmount(Event[] events, int[] quantities){
 		Double tot = 0.0;
 		int i = 0;

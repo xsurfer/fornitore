@@ -29,7 +29,9 @@
     <!-- Drop and re-create the database schema on startup -->
     <property name="hbm2ddl.auto">update</property>
     
-    <mapping class="org.jboss.as.quickstarts.wshelloworld.model.Category"/>
-    <mapping class="org.jboss.as.quickstarts.wshelloworld.model.Event"/>
+    <mapping class="it.fperfetti.asos.fornitore.model.Category"/>
+    <mapping class="it.fperfetti.asos.fornitore.model.Event"/>
+    <mapping class="it.fperfetti.asos.fornitore.model.Detail"/>
+    <mapping class="it.fperfetti.asos.fornitore.model.Order"/>    
   </session-factory>
 </hibernate-configuration>
