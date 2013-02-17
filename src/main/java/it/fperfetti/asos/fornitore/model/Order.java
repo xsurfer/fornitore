@@ -15,6 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "ORDERS")
 public class Order {
@@ -44,7 +46,7 @@ public class Order {
 	public Boolean getConfimated() { return confimated; }
 	public void setConfirmated(Boolean confimated) { this.confimated = confimated; }
 
-	@Temporal(TemporalType.TIMESTAMP) @NotNull @Column(updatable=false)
+	@Temporal(TemporalType.TIMESTAMP) @NotNull @Column(updatable=false) @Type(type="timestamp")
 	private Date timestamp;
 	public Date getDate() { return timestamp; }
 	public void setDate(Date timestamp) { this.timestamp = timestamp; }
