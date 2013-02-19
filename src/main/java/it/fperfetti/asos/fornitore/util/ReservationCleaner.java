@@ -41,12 +41,14 @@ public class ReservationCleaner implements Runnable {
 					/* Ripristino i biglietti*/
 					for(Detail d: o.getDetails()){							
 						Event e = d.getEvent();
-						System.out.println("aggiorno evento " + e.getTitle());
 						int quantity = d.getQuantity();
+						System.out.println("elimino dettaglio " + d.getId());
+						session.delete(d);				
+						
+						System.out.println("Aggiorno evento " + e.getTitle());
 						e.setAvailability(e.getAvailability()+quantity);
 						session.update(e);
-						System.out.println("elimino dettaglio " + d.getId());
-						session.delete(d);
+						System.out.println("Evento aggiornato " + e.getTitle());
 					}
 					System.out.println("elimino ordine " + o.getId());
 					session.delete(o);
